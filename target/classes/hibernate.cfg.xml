@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>        
+
+        <!-- using glassfish pool -->
+        <property name="show_sql">false</property>
+        <property name="hibernate.connection.datasource">jdbc/radio</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>        
+        <property name="hbm2ddl.auto">update</property>        
+        
+        <mapping class="model.beans.Genre"/>
+        <mapping class="model.beans.Contry"/>
+        <mapping class="model.beans.StationType"/>
+        <mapping class="model.beans.Station"/>
+        <mapping class="model.beans.Language"/>
+        <mapping class="model.beans.Search"/>
+        
+    </session-factory>
+
+</hibernate-configuration>
