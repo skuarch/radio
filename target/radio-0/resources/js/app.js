@@ -325,12 +325,11 @@ function playByGet() {
             contentType: 'application/json',
             url: ctx + 'getStation.html',
             data: {
-                id: id,
-                param: Math.random()
+                id: id
             },
             cache: false,
             success: function(data) {
-                player(data.url, "play", data.type);
+                player(data.urlStreaming, "play", data.type.id);
             }
         });
     }
@@ -416,16 +415,16 @@ $("#player-img").click(
             if (playerStatus === "stop") {
                 setPlayer("play");
                 playerStatus = "play";
-                $("#player-img").attr("src", "img/play.png");
+                $("#player-img").attr("src", ctxr + "img/play.png");
             } else {
                 if (playerStatus === "pause") {
                     setPlayer("play");
                     playerStatus = "play";
-                    $("#player-img").attr("src", "img/play.png");
+                    $("#player-img").attr("src", ctxr + "img/play.png");
                 } else {
                     setPlayer("pause");
                     playerStatus = "pause";
-                    $("#player-img").attr("src", "img/pause.png");
+                    $("#player-img").attr("src", ctxr + "img/pause.png");
                 }
             }
 
@@ -473,7 +472,7 @@ function backTopStations() {
 //==============================================================================
 $(document).ready(function() {
 
-    player("http://129.21.180.18:8001/pirate-192", "stop", 1);
+    player("http://204.45.73.122:8000", "stop", 1);
     
     $.async(function() {
         setTimeout(function() {

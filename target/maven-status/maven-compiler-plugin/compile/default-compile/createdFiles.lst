@@ -1,4 +1,5 @@
 model/util/StringUtilities.class
+controllers/station/GetStation.class
 model/beans/Station.class
 controllers/station/StationsByClick.class
 model/database/DataAccessObject.class
@@ -9,6 +10,7 @@ model/beans/Contry.class
 model/beans/Search.class
 model/beans/Genre.class
 model/servlet/ServletListener.class
+controllers/station/AddClick.class
 model/logic/FoundStations.class
 model/logic/container/StationContainer.class
 model/logic/StationTimer.class
@@ -18,6 +20,7 @@ model/database/ModelSearch.class
 model/util/HibernateUtil.class
 model/database/DAO.class
 controllers/application/Error404.class
+controllers/station/Search.class
 model/database/ModelStations.class
 controllers/station/StationsByOrder.class
 model/beans/Language.class

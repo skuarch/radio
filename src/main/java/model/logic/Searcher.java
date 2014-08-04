@@ -1,113 +1,57 @@
 package model.logic;
 
+import java.util.ArrayList;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import model.beans.Station;
+import model.logic.container.StationContainerManager;
 
 /**
  *
  * @author skuarch
  */
-public class Searcher extends Thread {
+public class Searcher {
 
-    private Station station = null;
-    private String stringToSearch = null;
-    private String[] arrayStringToSearch = null;
-    private String[] arrayKeywords = null;
+    private String keywords = null;
 
     //==========================================================================
-    public Searcher(Station station, String stringToSearch) {
-        this.station = station;
-        this.stringToSearch = stringToSearch;
-    } // end Searcher
+    /**
+     * construct.
+     *
+     * @param keywords String
+     */
+    public Searcher(String keywords) {
+        this.keywords = keywords;
+    } // end Search
 
     //==========================================================================
-    @Override
-    public void run() {
+    /**
+     * search station
+     *
+     * @return ArrayList<Station>
+     */
+    public ArrayList<Station> searchStations() {
 
-        String keywords = null;
+        ArrayList<Station> stations = null;
+        ArrayList<Station> foundStations = new ArrayList<>();
 
         try {
 
-            keywords = station.getKeywords() + " " + station.getName() + " " + station.getDescription();
-            keywords = keywords.toLowerCase();
+            stations = StationContainerManager.getStations();
 
-            arrayKeywords = keywords.split(" ");
-            arrayStringToSearch = stringToSearch.split(" ");
-
-            if (keywords.contains(stringToSearch)) {
-                FoundStations.put(station.getId(), station);
-            }
-
-            if (arrayStringToSearch.length < 1) {
-
-                return;
-
-            } else {
-
-                for (int i = 0; i < arrayStringToSearch.length; i++) {
-                    if (keywords.contains(arrayStringToSearch[i])) {
-                        FoundStations.put(station.getId(), station);
-                        return;
-                    }
-                }
-
-                for (int o = 0; o < arrayStringToSearch.length; o++) {
-                    for (int i = 0; i < arrayKeywords.length; i++) {
-                        if (arrayKeywords[i].equals(arrayStringToSearch[o])) {
-                            FoundStations.put(station.getId(), station);
-                        }
-                    }
-                }
-
-                for (int i = 0; i < arrayKeywords.length; i++) {
-                    if (searchByLetters(stringToSearch, arrayKeywords[i])) {
-                        FoundStations.put(station.getId(), station);
-                        break;
-                    }
-                }
-
-            }
+            foundStations = stations
+                    .stream()
+                    .filter(stationsPredicate)
+                    .collect(Collectors.toCollection(() -> new ArrayList<Station>()));
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         }
 
-    } // end run
+        return foundStations;
 
-    //==========================================================================
-    private synchronized boolean searchByLetters(String stringToSearch, String keyword) {
+    } // end searchStations
 
-        if (stringToSearch == null || stringToSearch.length() < 1) {
-            return false;
-        }
+    private final Predicate<Station> stationsPredicate = s -> s.getKeywords().contains(keywords);
 
-        if (keyword == null || keyword == "null" || keyword == "" || keyword.length() < 1) {
-            return false;
-        }
-
-        boolean flag = false;
-        int letterFound = 0;
-
-        try {
-
-            if (stringToSearch.charAt(0) == keyword.charAt(0)) {
-                for (int i = 0; i < stringToSearch.length(); i++) {
-                    for (int o = 0; o < keyword.length(); o++) {
-                        if (stringToSearch.charAt(i) == keyword.charAt(o)) {
-                            letterFound++;
-                        }
-                    }
-                }
-            }
-
-            if (letterFound >= (stringToSearch.length() / 2) + 1) {
-                flag = true;
-            }
-
-        } catch (StringIndexOutOfBoundsException sioobe) {
-            return false;
-        }
-
-        return flag;
-
-    } // end searchByLetters
 } // end class

@@ -49,7 +49,7 @@ public class StationContainerManager {
 
     //==========================================================================
     public static ArrayList<Station> getStations() {
-        return stations;
+        return new ArrayList<>(stations);
     }
 
     //==========================================================================

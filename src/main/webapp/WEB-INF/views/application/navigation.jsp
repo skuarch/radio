@@ -21,12 +21,12 @@
                     </a>
                 </li> 
                 <li>
-                    <a href="#" >
+                    <a href="index.html?lang=es" >
                         <spring:message code="text18"/>
                     </a>
                 </li> 
                 <li>
-                    <a href="#" >
+                    <a href="index.html?lang=en" >
                         <spring:message code="text19"/>
                     </a>
                 </li> 

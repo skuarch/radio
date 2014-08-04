@@ -31,7 +31,7 @@
                             ${s.language.name}
                         </span>
                     </div>
-                </c:forEach>>            
+                </c:forEach>          
             </c:otherwise>
         </c:choose>
     </div>    

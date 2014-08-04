@@ -32,8 +32,9 @@ public class Stations {
 
         try {
 
-            mav.setViewName("station/stations");
+            
             stations = StationContainerManager.getStationsLimit(start, start + maxResults);
+            mav.setViewName("station/stations");
             mav.addObject("stations", stations);
             
         } catch (Exception e) {
