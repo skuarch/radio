@@ -10,9 +10,9 @@
 <!DOCTYPE html>
 <html>
     <head>        
-        <jsp:include page="application/header.jsp"/>
-        <jsp:include page="application/links.jsp"/>
+        <jsp:include page="application/header.jsp"/>        
         <jsp:include page="application/metas.jsp"/>
+        <jsp:include page="application/links.jsp"/>
     </head>
     <body>        
         <div class="container">
@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-lg-4 text-center">
                     <div class="panel panel-default">                        
-                        <div class="panel-body">
+                        <div class="panel-body text-center">
                             <jsp:include page="application/left-ad.jsp" />
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-lg-4 text-center">
                     <div class="panel panel-default">                        
-                        <div class="panel-body">
+                        <div class="panel-body text-center">
                             <jsp:include page="application/right-ad.jsp" />
                         </div>
                     </div>

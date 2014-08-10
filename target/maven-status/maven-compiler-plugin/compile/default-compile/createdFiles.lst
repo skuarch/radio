@@ -6,7 +6,9 @@ model/database/DataAccessObject.class
 model/logic/container/StationContainerManager.class
 controllers/application/Index.class
 model/beans/StationType.class
+controllers/application/Googlef5dacf2a852b9480.class
 model/beans/Contry.class
+controllers/application/SiteMap.class
 model/beans/Search.class
 model/beans/Genre.class
 model/servlet/ServletListener.class
@@ -18,9 +20,11 @@ model/logic/Searcher.class
 controllers/station/Stations.class
 model/database/ModelSearch.class
 model/util/HibernateUtil.class
+controllers/application/Robots.class
 model/database/DAO.class
 controllers/application/Error404.class
 controllers/station/Search.class
+controllers/application/AdBlocker.class
 model/database/ModelStations.class
 controllers/station/StationsByOrder.class
 model/beans/Language.class

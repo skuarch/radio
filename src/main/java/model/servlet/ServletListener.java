@@ -1,13 +1,11 @@
 package model.servlet;
 
-import model.logic.container.StationContainerManager;
 import java.util.ArrayList;
 import java.util.Timer;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import model.beans.Station;
-import model.database.ModelStations;
 import model.logic.StationTimer;
 import org.apache.log4j.Logger;
 
@@ -31,14 +29,14 @@ public class ServletListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
 
         try {
+
+            //start the stations array
+            /*stations.addAll(ModelStations.getActiveStations());
+            StationContainerManager.setStations(stations);            */
             
             //start timer to renew stations arrayList
             timer = new Timer();
-            timer.scheduleAtFixedRate(new StationTimer(), 0, 1000 * 60 * 60);
-            
-            //start the stations array
-            stations.addAll(ModelStations.getActiveStations());
-            StationContainerManager.setStations(stations);               
+            timer.scheduleAtFixedRate(new StationTimer(), 0, 1000 * 60 * 60);            
 
         } catch (Exception e) {
             logger.error("contextInitialized", e);
@@ -49,11 +47,11 @@ public class ServletListener implements ServletContextListener {
     //==========================================================================
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        
-        stations.clear();        
+
+        stations.clear();
         timer.cancel();
         timer = null;
-        
+
     } // end contextDestroyed
 
 } // end class

@@ -1,7 +1,10 @@
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- hoyradio-right -->
+<!-- hoyradio-rigth-responsive -->
 <ins class="adsbygoogle"
-     style="display:inline-block;width:300px;height:250px"
+     style="display:block"
      data-ad-client="ca-pub-1035423102956365"
-     data-ad-slot="2762306795"></ins>
-<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+     data-ad-slot="2248139190"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>

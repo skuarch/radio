@@ -8,10 +8,12 @@
 /home/skuarch/NetBeansProjects/radio/src/main/java/controllers/application/Error404.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/model/logic/container/StationContainer.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/controllers/station/Stations.java
+/home/skuarch/NetBeansProjects/radio/src/main/java/controllers/application/Googlef5dacf2a852b9480.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/model/beans/Station.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/controllers/station/GetStation.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/model/logic/Searcher.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/model/database/ModelSearch.java
+/home/skuarch/NetBeansProjects/radio/src/main/java/controllers/application/Robots.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/model/util/StringUtilities.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/model/database/DAO.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/model/logic/StationTimer.java
@@ -20,7 +22,9 @@
 /home/skuarch/NetBeansProjects/radio/src/main/java/model/logic/container/StationContainerManager.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/controllers/station/StationsByOrder.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/model/servlet/ServletListener.java
+/home/skuarch/NetBeansProjects/radio/src/main/java/controllers/application/AdBlocker.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/controllers/station/Search.java
+/home/skuarch/NetBeansProjects/radio/src/main/java/controllers/application/SiteMap.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/model/database/DataAccessObject.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/controllers/station/AddClick.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/model/beans/Language.java

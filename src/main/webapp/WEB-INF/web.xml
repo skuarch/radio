@@ -20,6 +20,8 @@
     <servlet-mapping>
         <servlet-name>spring</servlet-name>
         <url-pattern>*.html</url-pattern>
+        <url-pattern>*.xml</url-pattern>
+        <url-pattern>*.txt</url-pattern>
     </servlet-mapping>
     
     <error-page>
