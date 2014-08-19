@@ -12,7 +12,7 @@ import model.logic.container.StationContainerManager;
  */
 public class Searcher {
 
-    private String keywords = null;
+    private String keywords = null;    
 
     //==========================================================================
     /**
@@ -37,6 +37,7 @@ public class Searcher {
 
         try {
 
+            keywords = keywords.toLowerCase();
             stations = StationContainerManager.getStations();
 
             foundStations = stations
@@ -53,5 +54,5 @@ public class Searcher {
     } // end searchStations
 
     private final Predicate<Station> stationsPredicate = s -> s.getKeywords().contains(keywords);
-
+    
 } // end class

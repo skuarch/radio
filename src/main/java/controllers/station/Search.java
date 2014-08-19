@@ -45,12 +45,13 @@ public class Search {
             //search keyword
             stations = new Searcher(keywords).searchStations();
 
-            mav.setViewName("station/search");
             mav.addObject("fs", stations);
 
         } catch (Exception e) {
             mav.addObject("js", "alertify.log('" + messageSource.getMessage("text4", null, locale) + "')");
             logger.error("search", e);
+        } finally {
+            mav.setViewName("station/search");
         }
 
         return mav;

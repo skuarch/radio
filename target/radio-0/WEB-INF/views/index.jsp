@@ -10,9 +10,9 @@
 <!DOCTYPE html>
 <html>
     <head>        
-        <jsp:include page="application/header.jsp"/>        
-        <jsp:include page="application/metas.jsp"/>
         <jsp:include page="application/links.jsp"/>
+        <jsp:include page="application/header.jsp"/>        
+        <jsp:include page="application/metas.jsp"/>        
     </head>
     <body>        
         <div class="container">

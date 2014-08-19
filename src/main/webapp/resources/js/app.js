@@ -144,4 +144,373 @@ if(i.length){k.addCallback(function(){return j})}return k},callLater:function(j,
 var i=f.call(arguments,1);var h=13;return d.async(function l(){var m=this;var n=d.now();if(j&&!j.apply(this,i)){setTimeout(function(){l.call(m)},Math.min(1000,h+(d.now()-n)))}else{k.callback()}return k})}});function c(h){return h!=null&&(h instanceof Error||d.type(h)==="error")
 }function g(h){return h!=null&&d.isFunction(h.always)}}(jQuery));
 
-var loader="<img src='"+ctxr+"img/ajax-loader.gif'/>";var start=0;var maxResults=18;var playerStatus="stop";function addClick(a){$.ajax({url:ctx+"addClick.html",type:"POST",async:false,data:{g:a}})}function beforeStations(){start=start-maxResults;if(start<0){start=0}stations(start,maxResults)}function cancelFormSubmission(){return false}function getUrlVars(){var b={};var a=window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(c,d,e){b[d]=e});return b}function getStationsByClick(){$("#stationsByClick").html(loader);$.ajax({url:ctx+"stationsByClick.html",type:"POST",success:function(a){$("#stationsByClick").html(a)}})}function getStationsByOrder(){$("#stationsByOrder").html(loader);$.ajax({url:ctx+"stationsByOrder.html",type:"POST",data:{order:"desc"},success:function(a){$("#stationsByOrder").html(a)}})}function getStationsByPosition(){$("#stationsByPosition").html(loader);$.ajax({url:ctx+"stationsByPosition.html",type:"POST",data:{order:"desc"},success:function(a){$("#stationsByPosition").html(a)}})}function moreStations(){stations(start+=12,maxResults)}function player(c,a,b){$("#jquery_jplayer_1").jPlayer("stop");$("#jquery_jplayer_1").jPlayer("destroy");$("#jquery_jplayer_1").jPlayer("volume",1);if(b===1){c+="/;stream/1";$("#jquery_jplayer_1").jPlayer({ready:function(){$(this).jPlayer("setMedia",{mp3:c}).jPlayer(a)},preload:"metadata",errorAlerts:false,swfPath:ctxr+"js/",supplied:"mp3,m4a,aacp,oga",volume:0.4,solution:"flash,html",wmode:"window"})}else{$("#jquery_jplayer_1").jPlayer({ready:function(){$(this).jPlayer("setMedia",{oga:c}).jPlayer(a)},preload:"metadata",errorAlerts:false,swfPath:ctxr+"js/",supplied:"oga",volume:0.4,solution:"flash,html",wmode:"window"})}}function playByGet(){var a=getUrlVars()["id"];if(a!==undefined){if(isNaN(a)){return}$.ajax({type:"GET",dataType:"json",contentType:"application/json",url:ctx+"getStation.html",data:{id:a},cache:false,success:function(b){player(b.urlStreaming,"play",b.type.id)}})}}function playStation(a,c,d,b){$("#modalLoading").show();player(a,"clearMedia",d);player(a,"pause",d);setPlayer("pause");$("#stationTitle").html(b);$.async(function(){setTimeout(function(){setPlayer("play")},1500)});$.async(function(){setTimeout(function(){$("#modalLoading").fadeOut(500)},3000)});$.async(function(){setTimeout(function(){alertify.success(b)},450)});$.async(function(){setTimeout(function(){addClick(b)},4000)})}function setPlayer(a){if(a===""||a===undefined){return}if(a==="play"||a==="pause"||a==="stop"||a==="destroy"){$("#jquery_jplayer_1").jPlayer(a);playerStatus=a}}function stations(b,a){$("#resultsStations").html(loader);$.ajax({url:ctx+"stations.html",type:"POST",data:{start:b,maxResults:a},success:function(c){$("#resultsStations").html(c)}})}$("#player-img").click(function(){if(playerStatus==="stop"){setPlayer("play");playerStatus="play";$("#player-img").attr("src",ctxr+"img/play.png")}else{if(playerStatus==="pause"){setPlayer("play");playerStatus="play";$("#player-img").attr("src",ctxr+"img/play.png")}else{setPlayer("pause");playerStatus="pause";$("#player-img").attr("src",ctxr+"img/pause.png")}}});function toggleStation(){$("#st").toggleClass("alert-warning")}function search(){var a=$("#searchField").val();if(a===undefined||a===""||a==="undefined"||a.length<3){return}a=escape(a);$("#resultsStations").html(loader);$.ajax({url:ctx+"search.html",data:{stringToSearch:a},type:"POST",success:function(b){$("#resultsStations").html(b)}})}function backTopStations(){start=0;stations(start,maxResults)}$(document).ready(function(){player("http://204.45.73.122:8000","stop",1);$.async(function(){setTimeout(function(){playByGet()},0)});$.async(function(){setTimeout(function(){stations(0,maxResults)},10)});$.async(function(){setTimeout(function(){getStationsByClick()},100)});$.async(function(){setTimeout(function(){getStationsByOrder()},150)});adBlocker()});function adBlocker(){if(!document.getElementsByClassName){return}var d=document.getElementsByClassName("afs_ads"),c=d[d.length-1];if(!c||c.innerHTML.length==0||c.clientHeight===0){window.location.href="adblocker.html"}else{c.style.display="none"}};
+var loader = "<img src='" + ctxr +"img/ajax-loader.gif'/>";
+var start = 0;
+var maxResults = 18;
+var playerStatus = "stop";
+
+//==============================================================================
+function addClick(g) {
+    $.ajax({
+        url: ctx + "addClick.html",
+        type: "POST",
+        async: false,
+        data: {
+            g: g
+        }
+    });
+} // end addClick
+
+//==============================================================================
+function beforeStations() {
+
+    start = start - maxResults;
+
+    if (start < 0) {
+        start = 0;
+    }
+
+    stations(start, maxResults);
+
+} // end nextStations
+
+//==============================================================================
+function cancelFormSubmission() {
+    return false;
+} // end cancelFormSubmission
+
+//==============================================================================
+function getUrlVars() {
+
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+        vars[key] = value;
+    });
+    return vars;
+
+} // end getUrlVars
+
+//==============================================================================
+function getStationsByClick() {
+
+    $("#stationsByClick").html(loader);
+
+    $.ajax({
+        url: ctx + "stationsByClick.html",
+        type: "POST",
+        //data: {order: 'asc'},
+        success: function(data) {
+            $("#stationsByClick").html(data);
+        }
+
+    });
+
+} // end getStationsByClick
+
+//==============================================================================
+function getStationsByOrder() {
+
+    $("#stationsByOrder").html(loader);
+
+    $.ajax({
+        url: ctx + "stationsByOrder.html",
+        type: "POST",
+        data: {order: "desc"},
+        success: function(data) {
+            $("#stationsByOrder").html(data);
+        }
+
+    });
+
+} // end getStationsByClick
+
+//==============================================================================
+function getStationsByPosition() {
+
+    $("#stationsByPosition").html(loader);
+
+    $.ajax({
+        url: ctx + "stationsByPosition.html",
+        type: "POST",
+        data: {order: "desc"},
+        success: function(data) {
+            $("#stationsByPosition").html(data);
+        }
+
+    });
+
+} // end getStationsByClick
+
+//==============================================================================
+function moreStations() {
+
+    stations(start += 12, maxResults);
+
+} // end moreStations
+
+//==============================================================================
+function player(stationUrl, option, playerType) {
+
+    $("#jquery_jplayer_1").jPlayer("stop");
+    $("#jquery_jplayer_1").jPlayer("destroy");
+    $("#jquery_jplayer_1").jPlayer("volume", 1);
+
+    if (playerType === 1) {
+
+        //shoutchast
+        stationUrl += "/;stream/1";
+
+        $("#jquery_jplayer_1").jPlayer({
+            ready: function() {
+                //$(this).jPlayer("setMedia", stream);
+                $(this).jPlayer("setMedia", {
+                    mp3: stationUrl
+
+                }).jPlayer(option);
+            },
+            //repeatOff: '.jp-repeat-off',
+            //warningAlerts: true,
+            preload: 'metadata',
+            errorAlerts: false,
+            swfPath: ctxr + "js/",
+            supplied: "mp3,m4a,aacp,oga",
+            volume: 0.4,
+            solution: "flash,html",
+            wmode: "window"
+
+        });
+
+    } else {
+
+        //Icecast
+        $("#jquery_jplayer_1").jPlayer({
+            ready: function() {
+                $(this).jPlayer("setMedia", {
+                    //mp3:stationUrl
+                    oga: stationUrl
+
+                }).jPlayer(option);
+            },
+            //repeatOff: '.jp-repeat-off',
+            //warningAlerts: true,
+            preload: 'metadata',
+            errorAlerts: false,
+            swfPath: ctxr + "js/",
+            //supplied: "mp3,m4a,aacp,oga",
+            supplied: "oga",
+            volume: 0.4,
+            solution: "flash,html",
+            wmode: "window"
+
+        });
+
+    }
+} // end player
+
+//==============================================================================
+function playByGet() {
+
+    var id = getUrlVars()["id"];
+
+    if (id !== undefined) {
+
+        if (isNaN(id)) {
+            return;
+        }
+
+        //con el id obtener los datos necesarios y correr el player
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json',
+            url: ctx + 'getStation.html',
+            data: {
+                id: id
+            },
+            cache: false,
+            success: function(data) {
+                player(data.urlStreaming, "play", data.type.id);
+            }
+        });
+    }
+} // end playByGet
+
+
+//==============================================================================
+function playStation(t, e, n, g) {
+
+    $("#modalLoading").show();
+    
+    player(t,"clearMedia",n);
+    
+    player(t, "pause", n);
+
+    setPlayer("pause");
+
+    $("#stationTitle").html(g);   
+    
+    $.async(function() {
+        setTimeout(function() {
+            setPlayer("play");
+        }, 1500);
+    });
+
+    $.async(function() {
+        setTimeout(function() {
+            $("#modalLoading").fadeOut(500);
+        }, 3000);
+    });
+
+    $.async(function() {
+        setTimeout(function() {
+            alertify.success(g);
+        }, 450);
+    });
+
+    $.async(function() {
+        setTimeout(function() {
+            addClick(g);
+        }, 4000);
+    });
+
+} // end playStation
+
+//==============================================================================
+function setPlayer(command) {
+
+    if (command === "" || command === undefined) {
+        return;
+    }
+
+    if (command === "play" || command === "pause" || command === "stop" || command === "destroy") {
+        $("#jquery_jplayer_1").jPlayer(command);
+        playerStatus = command;
+    }
+
+} // end setPlayer
+
+//==============================================================================
+function stations(start, maxResults) {
+
+    $("#resultsStations").html(loader);
+
+    $.ajax({
+        url: ctx + "stations.html",
+        type: "POST",
+        data: {
+            start: start,
+            maxResults: maxResults
+        }, success: function(data) {
+            $("#resultsStations").html(data);
+        }
+
+    });
+
+} // end stations
+
+//==============================================================================
+$("#player-img").click(
+        function() {
+
+            if (playerStatus === "stop") {
+                setPlayer("play");
+                playerStatus = "play";
+                $("#player-img").attr("src", ctxr + "img/play.png");
+            } else {
+                if (playerStatus === "pause") {
+                    setPlayer("play");
+                    playerStatus = "play";
+                    $("#player-img").attr("src", ctxr + "img/play.png");
+                } else {
+                    setPlayer("pause");
+                    playerStatus = "pause";
+                    $("#player-img").attr("src", ctxr + "img/pause.png");
+                }
+            }
+
+        }
+); // end 
+
+//==============================================================================    
+function toggleStation() {
+
+    $("#st").toggleClass("alert-warning");
+
+} // end toggleStation
+
+//==============================================================================
+function search() {
+
+    var stringToSearch = $("#searchField").val();
+
+    if (stringToSearch === undefined || stringToSearch === "" || stringToSearch === "undefined" || stringToSearch.length < 3) {
+        return;
+    }
+    stringToSearch = escape(stringToSearch);
+
+    $("#resultsStations").html(loader);
+    $.ajax({
+        url: ctx + "search.html",
+        data: {stringToSearch: stringToSearch},
+        type: "POST",
+        success: function(data) {
+            $("#resultsStations").html(data);
+        }
+
+    });
+
+} // end search
+
+//==============================================================================
+function backTopStations() {
+
+    start = 0;
+    stations(start, maxResults);
+
+} // end backTopStations
+
+//==============================================================================
+$(document).ready(function() {
+
+    player("http://204.45.73.122:8000", "stop", 1);
+    
+    $.async(function() {
+        setTimeout(function() {
+            playByGet();
+        }, 0);
+
+    });
+
+    $.async(function() {
+        setTimeout(function() {
+            stations(0, maxResults);
+        }, 10);
+    });
+
+    $.async(function() {
+        setTimeout(function() {
+            getStationsByClick();
+        }, 100);
+    });
+
+    $.async(function() {
+        setTimeout(function() {
+            getStationsByOrder();
+        }, 150);
+    });
+    
+    adBlocker();
+    
+});
+
+function adBlocker() {
+    if (!document.getElementsByClassName) {
+        return
+    }
+    var a = document.getElementsByClassName("afs_ads"), b = a[a.length - 1];
+    if (!b || b.innerHTML.length == 0 || b.clientHeight === 0) {
+        window.location.href = "adblocker.html";
+    } else {
+        b.style.display = "none";
+    }
+}
