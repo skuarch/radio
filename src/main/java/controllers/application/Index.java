@@ -13,10 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class Index {
    
     //==========================================================================
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public ModelAndView index(){
-        
-        String message = "chales";
+    @RequestMapping(value = {"","/","/index","/hoyradio","/hoyradio/index"}, method = RequestMethod.GET)
+    public ModelAndView index(){        
+       
         return new ModelAndView("index");
         
     } // end 

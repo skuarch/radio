@@ -33,7 +33,7 @@ public class Searcher {
     public ArrayList<Station> searchStations() {
 
         ArrayList<Station> stations = null;
-        ArrayList<Station> foundStations = new ArrayList<>(200);
+        ArrayList<Station> foundStations = new ArrayList<>();
 
         try {
 

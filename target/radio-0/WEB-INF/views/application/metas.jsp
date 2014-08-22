@@ -7,3 +7,4 @@
 <meta name="keywords" content="escuchar radio, escuchar radio gratis, escuchar radio en vivo, 	escucharadio, escucha radio, escuchar la radio, escuchar la radio en vivo, escuchar la radio gratis, escuchar radio en vivo gratis, escuchar radio gratis en vivo, escuchar radio por internet, escuchar radio en vivo por internet, escuchar radio por internet gratis,radio en vivo gratis"/>
 <meta name="application-name" content="hoyradio"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="canonical" href="http://hoyradio.com/" />

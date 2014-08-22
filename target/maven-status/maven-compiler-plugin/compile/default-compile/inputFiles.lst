@@ -17,7 +17,6 @@
 /home/skuarch/NetBeansProjects/radio/src/main/java/model/util/StringUtilities.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/model/database/DAO.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/model/logic/StationTimer.java
-/home/skuarch/NetBeansProjects/radio/src/main/java/interceptors/RequestAllInterceptor.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/model/beans/Genre.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/model/logic/FoundStations.java
 /home/skuarch/NetBeansProjects/radio/src/main/java/model/logic/container/StationContainerManager.java

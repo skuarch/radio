@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>    
-        <!--<meta http-equiv="refresh" content="2; url=http://hoyradio.com/">-->
+        <meta http-equiv="refresh" content="1; url=http://hoyradio.com/">
         <jsp:include page="header.jsp"/>
         <jsp:include page="links.jsp"/>
         <jsp:include page="metas.jsp"/>      

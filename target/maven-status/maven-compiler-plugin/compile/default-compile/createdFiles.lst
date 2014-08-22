@@ -13,9 +13,8 @@ model/beans/Search.class
 model/beans/Genre.class
 model/servlet/ServletListener.class
 controllers/station/AddClick.class
-interceptors/RequestAllInterceptor.class
-model/logic/FoundStations.class
 model/logic/container/StationContainer.class
+model/logic/FoundStations.class
 model/logic/StationTimer.class
 model/logic/Searcher.class
 controllers/station/Stations.class

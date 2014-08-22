@@ -23,7 +23,6 @@ public class StationTimer extends TimerTask {
         
         try {
             
-            logger.info("updating stations");
             StationContainerManager.setStations(ModelStations.getActiveStations());
             
         } catch (Exception ex) {

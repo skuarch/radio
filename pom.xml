@@ -17,6 +17,130 @@
     <dependencies>
         
         <dependency>
+            <artifactId>ant</artifactId>
+            <groupId>org.apache.ant</groupId>
+            <type>jar</type>
+            <version>1.8.1</version>
+        </dependency>
+        
+        <dependency>
+            <artifactId>ant-testutil</artifactId>
+            <groupId>org.apache.ant</groupId>
+            <type>jar</type>
+            <version>1.7.1</version>
+        </dependency>
+        
+        <dependency>
+            <artifactId>ant-launcher</artifactId>
+            <groupId>org.apache.ant</groupId>
+            <type>jar</type>
+            <version>1.8.1</version>
+        </dependency>
+        
+        <dependency>
+            <artifactId>asm</artifactId>
+            <groupId>org.ow2.asm</groupId>
+            <type>jar</type>
+            <version>5.0_BETA</version>
+        </dependency>
+        
+        <dependency>
+            <artifactId>commons-io</artifactId>
+            <groupId>commons-io</groupId>
+            <type>jar</type>
+            <version>2.2</version>
+        </dependency>
+        
+        <dependency>
+            <artifactId>commons-lang3</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <type>jar</type>
+            <version>3.1</version>
+        </dependency>
+        
+        <dependency>
+            <artifactId>hamcrest-core</artifactId>
+            <groupId>org.hamcrest</groupId>
+            <type>jar</type>
+            <version>1.3</version>
+        </dependency>
+        
+        <dependency>
+            <artifactId>jaxen</artifactId>
+            <groupId>jaxen</groupId>
+            <type>jar</type>
+            <version>1.1.1</version>
+        </dependency>
+        
+        <dependency>
+            <artifactId>icu4j</artifactId>
+            <groupId>com.ibm.icu</groupId>
+            <type>jar</type>
+            <version>2.6.1</version>
+        </dependency>
+        
+        <dependency>
+            <artifactId>javacc</artifactId>
+            <groupId>net.java.dev.javacc</groupId>
+            <type>jar</type>
+            <version>5.0</version>
+        </dependency>
+        
+        <dependency>
+            <artifactId>jcommander</artifactId>
+            <groupId>com.beust</groupId>
+            <type>jar</type>
+            <version>1.27</version>
+        </dependency>
+        
+        <dependency>
+            <artifactId>jdom</artifactId>
+            <groupId>jdom</groupId>
+            <type>jar</type>
+            <version>1.0</version>
+        </dependency>
+        
+        <dependency>
+            <artifactId>rhino</artifactId>
+            <groupId>org.mozilla</groupId>
+            <type>jar</type>
+            <version>1.7R3</version>
+        </dependency>
+        
+        <dependency>
+            <artifactId>xalan</artifactId>
+            <groupId>xalan</groupId>
+            <type>jar</type>
+            <version>2.6.0</version>
+        </dependency>
+        
+        <dependency>
+            <artifactId>xercesImpl</artifactId>
+            <groupId>xerces</groupId>
+            <type>jar</type>
+            <version>2.6.2</version>
+        </dependency>
+        
+        <dependency>
+            <artifactId>xmlParserAPIs</artifactId>
+            <groupId>xerces</groupId>
+            <type>jar</type>
+            <version>2.6.2</version>
+        </dependency>
+        
+        <dependency>
+            <artifactId>xom</artifactId>
+            <groupId>xom</groupId>
+            <type>jar</type>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <artifactId>saxon</artifactId>
+            <groupId>net.sourceforge.saxon</groupId>
+            <type>jar</type>
+            <version>9.1.0.8</version>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
