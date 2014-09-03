@@ -315,6 +315,8 @@
 
     <build>
         
+        <finalName>radio</finalName>
+        
         <plugins>
             
             <plugin>

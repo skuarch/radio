@@ -46,23 +46,44 @@
             <div class="row">
                 <jsp:include page="application/subnavigation.jsp" />
             </div>
-        </div>
+        </div>       
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">        
                     <div class="panel panel-default _1">
+                        
+                        <div class="_11">
+                            <input type="button" class="btn btn-info btn-sm" value="<spring:message code="text25" />" onclick="search('rock')"/>
+                            <input type="button" class="btn btn-primary btn-sm" value="<spring:message code="text26" />" onclick="search('pop')"/>
+                            <input type="button" class="btn btn-success btn-sm" value="<spring:message code="text27" />" onclick="search('electronic')"/>
+                            <input type="button" class="btn btn-warning btn-sm" value="<spring:message code="text28" />" onclick="search('reggae')"/>
+                            <input type="button" class="btn btn-danger btn-sm" value="<spring:message code="text29" />" onclick="search('latina')"/>                            
+                            <input type="button" class="btn btn-default btn-sm" value="<spring:message code="text30" />" onclick="search('clasica')"/>    
+                            <input type="button" class="btn btn-info btn-sm" value="<spring:message code="text31" />" onclick="search('metal')"/>                            
+                        </div>
                         <div class="_7" id="resultsStations">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <c:import url="application/footer.jsp"/> 
         <div id="modalLoading" class="_8">
             <div class="_9">
                 <img src="<c:url value="/resources/img/484.GIF"/>" alt="" height="128" width="128"/>
             </div>
-        </div>  
+        </div> 
+
+        <div class="footer" style="background-color: #fff">
+            <div class="container">
+                <p class="text-muted">
+                    <br/>
+                    <spring:message code="text32"/>
+                </p>
+            </div>
+        </div>
         <div class="afs_ads">&nbsp;</div>
         <jsp:include page="application/scripts.jsp" />
     </body>
