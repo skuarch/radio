@@ -7,6 +7,7 @@ import model.logic.container.StationContainerManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,16 +23,16 @@ public class Stations {
 
     @Autowired
     private MessageSource messageSource;
-    private static final Logger logger = Logger.getLogger(Stations.class);    
+    private static final Logger logger = Logger.getLogger(Stations.class);  
+    private final static Locale locale = LocaleContextHolder.getLocale();
 
     //==========================================================================
     @RequestMapping(value = "/stations", method = RequestMethod.POST)
-    public ModelAndView getStations(@RequestParam("start") int start, @RequestParam("maxResults") int maxResults, ModelAndView mav, Locale locale) {
+    public ModelAndView getStations(@RequestParam("start") int start, @RequestParam("maxResults") int maxResults, ModelAndView mav) {
 
         ArrayList<Station> stations;
 
         try {
-
             
             stations = StationContainerManager.getStationsLimit(start, start + maxResults);
             mav.setViewName("station/stations");

@@ -41,7 +41,7 @@ public class Searcher {
             stations = StationContainerManager.getStations();
 
             foundStations = stations
-                    .stream()
+                    .parallelStream()
                     .filter(stationsPredicate)
                     .collect(Collectors.toCollection(() -> new ArrayList<Station>()));
 

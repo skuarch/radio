@@ -16,47 +16,24 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Order;
 import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 
 /**
- * Data Access Object generic.
+ * Connection with Hibernate.
  *
  * @author skuarch
  */
-final class DataAccessObject {
+class DataAccessObject {
 
+    private static SessionFactory sessionFactory = null;
+    //private static ServiceRegistry serviceRegistry = null;
+    //private static StandardServiceRegistryBuilder serviceRegistryBuilder;
     private static Session session = null;
     private static Transaction transaction = null;
-    private static ServiceRegistry serviceRegistry = null;
-    private static SessionFactory sessionFactory = null;
-    private static StandardServiceRegistryBuilder serviceRegistryBuilder = null;
+    
 
     //==========================================================================
-    static {
-        try {
-            
-            System.out.println("static ********");
-            Configuration configuration = new Configuration();
-            configuration.configure();
-            serviceRegistryBuilder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());            
-            serviceRegistry = serviceRegistryBuilder.build();
-            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-
-        } catch (HibernateException e) {
-            try {
-                throw e;
-            } catch (HibernateException ex) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    //==========================================================================
-    /**
-     * this class doesn't need a public constructor.
-     */
     private DataAccessObject() {
-    }
+    } // end DataAccessObject
 
     //==========================================================================
     /**
@@ -64,7 +41,7 @@ final class DataAccessObject {
      */
     private static void openSession() {
 
-        session = sessionFactory.openSession();
+        session = HibernateUtil.getSessionFactory().openSession();
 
     } // end openSession
 
@@ -73,7 +50,7 @@ final class DataAccessObject {
      * close session.
      */
     private static void closeSession() {
-
+        
         if (session != null) {
 
             if (session.isOpen()) {
@@ -82,6 +59,16 @@ final class DataAccessObject {
         }
 
     } // end closeSession
+
+    //==========================================================================
+    private static void beginTransaction() {
+        transaction = session.beginTransaction();
+    }
+
+    //==========================================================================
+    private static void commitTransaction() {
+        transaction.commit();
+    }
 
     //==========================================================================
     /**
@@ -102,10 +89,10 @@ final class DataAccessObject {
 
         try {
 
-            openSession();
-            transaction = session.beginTransaction();
+            openSession();            
             id = (long) session.save(object);
-            transaction.commit();
+            beginTransaction();
+            commitTransaction();
 
         } catch (HibernateException he) {
             throw he;
@@ -132,10 +119,10 @@ final class DataAccessObject {
 
         try {
 
-            openSession();
-            transaction = session.beginTransaction();
+            openSession();            
             session.delete(object);
-            transaction.commit();
+            beginTransaction();
+            commitTransaction();
 
         } catch (HibernateException he) {
             throw he;
@@ -143,7 +130,7 @@ final class DataAccessObject {
             closeSession();
         }
 
-    } // end delete 
+    } // end delete
 
     //==========================================================================
     /**
@@ -169,10 +156,10 @@ final class DataAccessObject {
 
         try {
 
-            openSession();
-            transaction = session.beginTransaction();
+            openSession();            
             t = (T) session.get(type.getClass(), id);
-            transaction.commit();
+            beginTransaction();            
+            commitTransaction();
 
         } catch (HibernateException he) {
             throw he;
@@ -193,6 +180,7 @@ final class DataAccessObject {
      * @return List<T>
      * @throws HibernateException
      */
+    @SuppressWarnings("unchecked")
     protected static <T> List<T> getList(final T type) throws HibernateException {
 
         if (type == null) {
@@ -204,9 +192,9 @@ final class DataAccessObject {
         try {
 
             openSession();
-            transaction = session.beginTransaction();
-            list = session.createQuery("from " + type.getClass().getCanonicalName()).list();
-            transaction.commit();
+            list =  session.createQuery("from " + type.getClass().getCanonicalName()).list();
+            beginTransaction();
+            commitTransaction();
 
         } catch (HibernateException he) {
             throw he;
@@ -227,6 +215,7 @@ final class DataAccessObject {
      * @param type type
      * @return List<T>
      */
+    @SuppressWarnings("unchecked")
     protected static <T> List<T> hql(final String hql, final T type) {
 
         if (hql == null || hql.length() < 1) {
@@ -242,10 +231,12 @@ final class DataAccessObject {
 
         try {
 
-            openSession();
+            openSession();            
             query = session.createQuery(hql);
             query.setProperties(type);
             list = query.list();
+            beginTransaction();
+            commitTransaction();
 
         } catch (HibernateException e) {
             throw e;
@@ -267,6 +258,7 @@ final class DataAccessObject {
      * @param maxResults int
      * @return List<T>
      */
+    @SuppressWarnings("unchecked")
     protected static <T> List<T> hql(final String hql, final T type, final int maxResults) {
 
         if (hql == null || hql.length() < 1) {
@@ -286,11 +278,13 @@ final class DataAccessObject {
 
         try {
 
-            openSession();
+            openSession();            
             query = session.createQuery(hql);
             query.setMaxResults(maxResults);
             query.setProperties(type);
             list = query.list();
+            beginTransaction();
+            commitTransaction();
 
         } catch (HibernateException e) {
             throw e;
@@ -312,6 +306,7 @@ final class DataAccessObject {
      * @return List<T>
      * @throws HibernateException
      */
+    @SuppressWarnings("unchecked")
     protected static <T> List<T> query(final String queryName, final T type) throws HibernateException {
 
         if (queryName == null || queryName.length() < 1) {
@@ -327,10 +322,12 @@ final class DataAccessObject {
 
         try {
 
-            openSession();
+            openSession();            
             query = session.getNamedQuery(queryName);
             query.setProperties(type);
             list = query.list();
+            beginTransaction();
+            commitTransaction();
 
         } catch (HibernateException he) {
             throw he;
@@ -353,6 +350,7 @@ final class DataAccessObject {
      * @return List<T>
      * @throws HibernateException
      */
+    @SuppressWarnings("unchecked")
     protected static <T> List<T> query(final String queryName, final HashMap<String, String> parameters, final T type) throws HibernateException {
 
         if (queryName == null || queryName.length() < 1) {
@@ -372,7 +370,7 @@ final class DataAccessObject {
 
         try {
 
-            openSession();
+            openSession();            
             query = session.getNamedQuery(queryName);
             query.setProperties(type);
 
@@ -381,6 +379,8 @@ final class DataAccessObject {
             }
 
             list = query.list();
+            beginTransaction();
+            commitTransaction();
 
         } catch (HibernateException he) {
             throw he;
@@ -405,6 +405,7 @@ final class DataAccessObject {
      * @return List<T>
      * @throws HibernateException
      */
+    @SuppressWarnings("unchecked")
     protected static <T> List<T> query(final String queryName, final HashMap<String, String> parameters, final T type, final int maxResults) throws HibernateException {
 
         if (queryName == null || queryName.length() < 1) {
@@ -430,7 +431,7 @@ final class DataAccessObject {
 
         try {
 
-            openSession();
+            openSession();            
             query = session.getNamedQuery(queryName);
             query.setProperties(type);
             query.setMaxResults(maxResults);
@@ -442,6 +443,8 @@ final class DataAccessObject {
             }
 
             list = query.list();
+            beginTransaction();
+            commitTransaction();
 
         } catch (HibernateException he) {
             throw he;
@@ -452,15 +455,16 @@ final class DataAccessObject {
         return list;
 
     } // end query
-    
+
     //==========================================================================
     /**
      * @param <T> type
      * @param queryName String
      * @return List or null
      * @throws HibernateException
-     */
-    public static <T> ArrayList<T> query(T type, String queryName,boolean ignoreCache) throws HibernateException {
+     */ 
+    @SuppressWarnings("unchecked")
+    protected static <T> ArrayList<T> query(T type, String queryName, boolean ignoreCache) throws HibernateException {
 
         if (queryName == null || queryName.length() < 1) {
             throw new NullPointerException("queryName is null or empty");
@@ -474,20 +478,20 @@ final class DataAccessObject {
         ArrayList<T> arrayList = null;
 
         try {
-            
-            query = session.getNamedQuery(queryName);            
-            
-            if(ignoreCache){
+
+            query = session.getNamedQuery(queryName);
+
+            if (ignoreCache) {
                 query.setCacheMode(CacheMode.IGNORE);
             }
-            
-            query.setProperties(type);            
+
+            query.setProperties(type);
             arrayList = new ArrayList(query.list());
 
         } catch (HibernateException he) {
             throw he;
         } finally {
-            HibernateUtil.closeSession(session);
+            closeSession();
         }
 
         return arrayList;
@@ -495,6 +499,7 @@ final class DataAccessObject {
     } // end query
 
     //==========================================================================
+    @SuppressWarnings("unchecked")
     protected static <T> List<T> queryLimit(String queryName, T type, int start, int maxResults) throws HibernateException {
 
         if (queryName == null || queryName.length() < 1) {
@@ -504,7 +509,7 @@ final class DataAccessObject {
         if (start < 0 || maxResults < 0) {
             throw new NullPointerException("parameters are less than 0");
         }
-
+        
         List<T> list = null;
         Query query;
 
@@ -527,6 +532,7 @@ final class DataAccessObject {
     }
 
     //==========================================================================
+    @SuppressWarnings("unchecked")
     protected static <T> List<T> queryLimit(T type, String queryName, int start, int maxResults) throws HibernateException {
 
         if (queryName == null || queryName.length() < 1) {
@@ -547,7 +553,7 @@ final class DataAccessObject {
             query.setMaxResults(maxResults);
             query.setProperties(type);
             list = query.list();
-
+            
         } catch (HibernateException he) {
             throw he;
         } finally {
@@ -573,10 +579,11 @@ final class DataAccessObject {
 
         try {
 
-            openSession();
-            transaction = session.beginTransaction();
+            openSession();            
             session.update(object);
-            transaction.commit();
+            beginTransaction();
+            commitTransaction();
+            
 
         } catch (HibernateException he) {
             throw he;
@@ -585,22 +592,31 @@ final class DataAccessObject {
         }
 
     } // end update
-    
+
     //==========================================================================
-    public static <T> ArrayList<T> orderCriteria(T type, int maxResults, String propertyName,String order) {
+    @SuppressWarnings("unchecked")
+    protected static <T> ArrayList<T> orderCriteria(T type, int maxResults, String propertyName, String order) {
 
         ArrayList<T> list = null;
-
-        Criteria criteria = session.createCriteria(type.getClass());
         
-        if(order.equalsIgnoreCase("asc")){
+        try {
+            
+            Criteria criteria = session.createCriteria(type.getClass());
+
+        if (order.equalsIgnoreCase("asc")) {
             criteria.addOrder(Order.asc(propertyName));
-        }else{
+        } else {
             criteria.addOrder(Order.desc(propertyName));
         }
-        
+
         criteria.setMaxResults(maxResults);
         list = new ArrayList(criteria.list());
+            
+        } catch (Exception e) {
+            throw e;
+        }finally{
+            closeSession();
+        }
 
         return list;
     }

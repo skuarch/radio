@@ -49,7 +49,7 @@ public class DAO {
             session = HibernateUtil.getSessionFactory().openSession();
 
         } catch (HibernateException he) {
-            HibernateUtil.closeSession(session);
+            HibernateUtil.closeSession(session);            
             throw he;
         }
     } // end startSession
@@ -203,7 +203,7 @@ public class DAO {
     /**
      * return an ArrayList of objects if exists then return a null.
      *
-     * @param <T> type
+     * @param <T> type     
      * @return ArrayList or null
      * @throws HibernateException
      */

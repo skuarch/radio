@@ -9,7 +9,7 @@ import model.beans.Station;
  */
 public class StationContainer {
 
-    private static ArrayList<Station> stations = new ArrayList<>(200);
+    private static volatile ArrayList<Station> stations = new ArrayList<>(200);
 
     //==========================================================================
     private StationContainer() {

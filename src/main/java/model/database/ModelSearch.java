@@ -1,7 +1,6 @@
 package model.database;
 
 import model.beans.Search;
-import model.database.DAO;
 
 /**
  *
@@ -20,7 +19,7 @@ public class ModelSearch {
             throw new IllegalArgumentException("search is null");
         }
 
-        new DAO().create(search);
+        new DAO().create(search);        
 
     }
 

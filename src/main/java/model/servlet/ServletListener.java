@@ -16,8 +16,7 @@ import org.apache.log4j.Logger;
 @WebListener
 public class ServletListener implements ServletContextListener {
 
-    public static final Logger logger = Logger.getLogger(ServletListener.class);
-    public static final ArrayList<Station> stations = new ArrayList<>(200);
+    public static final Logger logger = Logger.getLogger(ServletListener.class);    
     private Timer timer = null;
 
     //==========================================================================
@@ -47,8 +46,7 @@ public class ServletListener implements ServletContextListener {
     //==========================================================================
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-
-        stations.clear();
+        
         timer.cancel();
         timer = null;
 

@@ -134,12 +134,14 @@
             <type>jar</type>
             <version>1.0</version>
         </dependency>
+        
         <dependency>
             <artifactId>saxon</artifactId>
             <groupId>net.sourceforge.saxon</groupId>
             <type>jar</type>
             <version>9.1.0.8</version>
         </dependency>
+        
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
@@ -206,7 +208,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.3.5.Final</version>
+            <version>4.3.6.Final</version>
         </dependency>
         
         <dependency>
@@ -309,6 +311,18 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.1</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>net.sf.saxon</groupId>
+            <artifactId>Saxon-HE</artifactId>
+            <version>9.5.1-6</version>
         </dependency>
                
     </dependencies>
